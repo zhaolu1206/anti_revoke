@@ -9,7 +9,7 @@ from .config import ADMIN_NICKNAME, ADMIN_WECHAT_ID
 
 logger = logging.getLogger(__name__)
 
-@register(name="AntiRevoke", desc="A plugin to prevent message revocation", version="0.1", author="your_name", desire_priority= -1)
+@register(name="AntiRevoke", desc="A plugin to prevent message revocation", version="0.1", author="luke", desire_priority= -1)
 class AntiRevoke(Plugin):
     def __init__(self):
         super().__init__()
