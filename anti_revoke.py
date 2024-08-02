@@ -5,6 +5,7 @@ from bridge.context import ContextType, EventContext
 from bridge.reply import Reply, ReplyType
 from bridge.event import Event, EventAction
 import logging
+from .config import ADMIN_NICKNAME, ADMIN_WECHAT_ID
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +24,7 @@ class AntiRevoke(Plugin):
             revoked_msg_id = msg.text.split('msgid=')[1].split('&')[0]
             revoked_msg = itchat.search_chatrooms(userName=msg.fromUserName).get(revoked_msg_id)
             if revoked_msg:
-                admin = itchat.search_friends(nickName='老赵')[0]['UserName']
+                admin = itchat.search_friends(nickName=ADMIN_NICKNAME)[0]['UserName'] if ADMIN_NICKNAME else ADMIN_WECHAT_ID
                 itchat.send(f"检测到撤回消息：{revoked_msg['Text']}", toUserName=admin)
                 e_context.action = EventAction.BREAK_PASS
         else:
